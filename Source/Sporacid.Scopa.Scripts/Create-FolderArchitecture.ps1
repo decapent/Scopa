@@ -16,7 +16,7 @@ $hiveTableFolder = New-Item -Path $Destination -Name $HiveTableName -Type Direct
 
 # Only SP2013 log files are supported at the moment
 $files = Get-ChildItem -Path $Datasource -Recurse
-$patterns = @("^([a-zA-z]+)-([\d]{8})-([\d]{4}).log$", "^([a-zA-z]+)-([a-zA-z]+)-([\d]{8})-([\d]{4}).log$")
+$patterns = @("^([a-zA-z]+)-([\d]{8})-[\d]{4}.log$", "^([a-zA-z]+)-([a-zA-z]+)-([\d]{8})-[\d]{4}.log$")
 
 $files | ForEach-Object	{
 	
@@ -26,7 +26,7 @@ $files | ForEach-Object	{
 			# a wild magic variable "$matches"
 			$machineName = $matches[1];
 			$logDate = $matches[2];
-			if ($matches.Count -gt 4) {
+			if ($matches.Count -gt 3) {
 				$machineName = [string]::Format("{0}-{1}", $matches[1], $matches[2]);
 				$logDate = $matches[3];
 			}
