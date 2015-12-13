@@ -19,7 +19,7 @@ if(Test-Path($DataSource)) {
 	
 	# Copying newly created architecture to Azure Blob Container
 	# .\Magically-MagicalMagic.ps1
-}  else {
+} else {
 	Write-Host "Please submit a valid datasource path." -ForeGroundColor Yellow
 }
 
