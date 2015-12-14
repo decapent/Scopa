@@ -24,19 +24,19 @@ $files | ForEach-Object	{
 		if ($_ -match $pattern)	{
 			
 			# a wild magic variable "$matches"
-			$machineName = $matches[1];
+			$hostName = $matches[1];
 			$logDate = $matches[2];
 			if ($matches.Count -gt 3) {
-				$machineName = [string]::Format("{0}-{1}", $matches[1], $matches[2]);
+				$hostName = [string]::Format("{0}-{1}", $matches[1], $matches[2]);
 				$logDate = $matches[3];
 			}
 			
-			$machineFolderPath = [string]::Format("{0}\MachineName={1}", $hiveTableFolder.FullName, $machineName)
-			$logDateFolderPath = [string]::Format("{0}\LogDate={1}", $machineFolderPath, $logDate)
+			$hostFolderPath = [string]::Format("{0}\hostname={1}", $hiveTableFolder.FullName, $hostName)
+			$logDateFolderPath = [string]::Format("{0}\logdate={1}", $hostFolderPath, $logDate)
 			
 			# Already Exists ?
-			if(-not(Test-Path($machineFolderPath))) {
-				New-Item -Path $machineFolderPath -Type Directory
+			if(-not(Test-Path($hostFolderPath))) {
+				New-Item -Path $hostFolderPath -Type Directory
 			}
 			
 			if(-not (Test-Path($logDateFolderPath))) {
