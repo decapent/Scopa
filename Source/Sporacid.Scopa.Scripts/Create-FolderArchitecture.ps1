@@ -12,14 +12,17 @@ Param (
 ) 
 
 # Creating Root Folder which will hold the folder structure
-$hiveTableFolder = New-Item -Path $Destination -Name $HiveTableName -Type Directory
+$hiveTableFolder = Join-Path -Path $Destination -ChildPath $HiveTableName
+if(-not(Test-Path())) {
+	$hiveTableFolder = New-Item -Path $Destination -Name $HiveTableName -Type Directory
+}
 
 # Regex patterns matching a sharepoint's log file name
 # The only case the first pattern doesn't match the file name
 # is if the host name contains the '-' caracter.
 # As a workaround the second pattern was introduced.
-$patterns = @("^([a-zA-z]+)-([\d]{8})-[\d]{4}.log$"
-			 ,"^([a-zA-z]+)-([a-zA-z]+)-([\d]{8})-[\d]{4}.log$")
+$patterns = @("^([\w0-9]+)-([\d]{8})-[\d]{4}.log$"
+			 ,"^([\w0-9]+)-([\w0-9]+)-([\d]{8})-[\d]{4}.log$")
 			 
 $files = Get-ChildItem -Path $Datasource -Recurse
 
