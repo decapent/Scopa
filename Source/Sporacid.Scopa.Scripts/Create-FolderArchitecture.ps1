@@ -13,7 +13,7 @@ Param (
 
 # Creating Root Folder which will hold the folder structure
 $hiveTableFolder = Join-Path -Path $Destination -ChildPath $HiveTableName
-if(-not(Test-Path())) {
+if(-not(Test-Path($hiveTableFolder))) {
 	$hiveTableFolder = New-Item -Path $Destination -Name $HiveTableName -Type Directory
 }
 
