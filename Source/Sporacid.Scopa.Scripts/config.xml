@@ -1,0 +1,14 @@
+<RemoteClients>
+	<RemoteClient hostname="VMSPPLAV">
+		<LogPaths>
+			<LogUncPath>\\VMSPPLAV\c$\Logs\SP2013</LogUncPath>
+			<LogUncPath>\\VMSPPLAV\c$\Logs\IIS</LogUncPath>
+		</LogPaths>
+	</RemoteClient>
+	<RemoteClient hostname="VMSPPHIL">
+		<LogPaths>
+			<LogUncPath>\\VMSPPHIL\c$\Logs\SP2013</LogUncPath>
+			<LogUncPath>\\VMSPPHIL\c$\Logs\IIS</LogUncPath>
+		</LogPaths>
+	</RemoteClient>
+</RemoteClients>
