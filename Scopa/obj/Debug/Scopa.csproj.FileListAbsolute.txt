@@ -1,0 +1,6 @@
+D:\Code\Scopa\Scopa\bin\Debug\Scopa.exe.config
+D:\Code\Scopa\Scopa\bin\Debug\Scopa.exe
+D:\Code\Scopa\Scopa\bin\Debug\Scopa.pdb
+D:\Code\Scopa\Scopa\obj\Debug\Scopa.csprojResolveAssemblyReference.cache
+D:\Code\Scopa\Scopa\obj\Debug\Scopa.exe
+D:\Code\Scopa\Scopa\obj\Debug\Scopa.pdb
