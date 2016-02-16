@@ -1,0 +1,5 @@
+D:\Code\Scopa\Sporacid.Scopa.Tests\bin\Debug\Sporacid.Scopa.Tests.dll
+D:\Code\Scopa\Sporacid.Scopa.Tests\bin\Debug\Sporacid.Scopa.Tests.pdb
+D:\Code\Scopa\Sporacid.Scopa.Tests\obj\Debug\Sporacid.Scopa.Tests.csprojResolveAssemblyReference.cache
+D:\Code\Scopa\Sporacid.Scopa.Tests\obj\Debug\Sporacid.Scopa.Tests.dll
+D:\Code\Scopa\Sporacid.Scopa.Tests\obj\Debug\Sporacid.Scopa.Tests.pdb

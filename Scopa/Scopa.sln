@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sporacid.Scopa.Scripts", ".
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{41E96E4D-58E9-4E95-A839-6942FB38D526}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sporacid.Scopa.Tests", "..\Sporacid.Scopa.Tests\Sporacid.Scopa.Tests.csproj", "{A82FE788-F34A-4236-88A8-94B86FF9C9AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{FD525E00-B895-4E1C-B01E-7D378DA7AB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD525E00-B895-4E1C-B01E-7D378DA7AB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD525E00-B895-4E1C-B01E-7D378DA7AB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82FE788-F34A-4236-88A8-94B86FF9C9AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82FE788-F34A-4236-88A8-94B86FF9C9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82FE788-F34A-4236-88A8-94B86FF9C9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82FE788-F34A-4236-88A8-94B86FF9C9AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

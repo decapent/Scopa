@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sporacid.Scopa.Entities;
+using System;
 
 namespace Sporacid.Scopa
 {
@@ -10,7 +7,11 @@ namespace Sporacid.Scopa
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, @"C:\Logs\SP2013Logs");
+            strategy.CreateLocalStagingDirectory("SP2013_Logs");
+            
+
+
             Console.ReadKey();
         }
     }
