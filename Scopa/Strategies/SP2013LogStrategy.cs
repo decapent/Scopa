@@ -8,16 +8,28 @@ using System.Linq;
 namespace Sporacid.Scopa.Strategies
 {
     /// <summary>
-    /// Concrete strategy for SharePoint 2013 Log files
+    /// Concrete strategy for SharePoint 2013 Log files processing. 
     /// </summary>
     public class SP2013LogStrategy : ILogStrategy
     {
-        public SharePoint2013LogArchive logArchive { get; set; }
+        /// <summary>
+        /// A SharePoint's 2013 Log archive
+        /// </summary>
+        public SharePoint2013LogArchive LogArchive { get; set; }
+
+        /// <summary>
+        /// The destination path
+        /// </summary>
         public string DestinationPath { get; set; }
 
+        /// <summary>
+        /// Create a new SP2013LogStrategy
+        /// </summary>
+        /// <param name="logArchive">The SP2013 Log Archive</param>
+        /// <param name="destinationPath">The destination path</param>
         public SP2013LogStrategy(SharePoint2013LogArchive logArchive, string destinationPath)
         {
-            this.logArchive = logArchive;
+            this.LogArchive = logArchive;
             this.DestinationPath = destinationPath;
         }
 
@@ -29,14 +41,14 @@ namespace Sporacid.Scopa.Strategies
         public string CreateLocalStagingDirectory(string hiveTableName)
         {
             DirectoryInfo stagingDirectory = null;
-            var stagingPath = string.Format("{0}\\{1}-staging", this.logArchive.rawDataSource, hiveTableName);
+            var stagingPath = string.Format("{0}\\{1}-staging", this.LogArchive.DataSourcePath, hiveTableName);
 
             try
             {
                 stagingDirectory = Directory.CreateDirectory(stagingPath);
 
                 // Process files from archive to proper HDFS index-friendly subfolders
-                var filesToStage = Directory.EnumerateFiles(this.logArchive.rawDataSource, "*.log", SearchOption.AllDirectories).ToList();
+                var filesToStage = Directory.EnumerateFiles(this.LogArchive.DataSourcePath, "*.log", SearchOption.AllDirectories).ToList();
                 foreach (var filePath in filesToStage)
                 {
                     var fileName = filePath.Substring(filePath.LastIndexOf("\\") + 1);
@@ -52,12 +64,20 @@ namespace Sporacid.Scopa.Strategies
                     }
                 }
             }
-            catch(IOException ioex)
+            catch (IOException ioex)
             {
                 Console.WriteLine(ioex);
             }
 
             return stagingDirectory.FullName;
+        }
+
+        /// <summary>
+        /// Push some files to HDFS
+        /// </summary>
+        public void PushToHDFS()
+        {
+            throw new NotImplementedException();
         }
 
         private string EnsureHDFSIndexes(string stagingDirectoryPath, List<string> HDFSIndexes)
@@ -96,12 +116,6 @@ namespace Sporacid.Scopa.Strategies
             }
 
             return HDFSIndexes;
-        }
-
-
-        public void PushToHDFS()
-        {
-            throw new NotImplementedException();
         }
     }
 }
