@@ -1,0 +1,15 @@
+<Configuration>
+  <RemoteHost hostname="VMSPPLAV" destination="\\VMSPPLAV\raw" />
+  <LastScopaDate>2/20/2016 10:00:02 PM</LastScopaDate>
+  <Logs>
+    <Log type="SP2013">
+      <LocalPath>C:\Logs\SP2013</LocalPath>
+      <FileNamePattern>^([\w0-9]+)-([\d]{8})-[\d]{4}.log$</FileNamePattern>
+    </Log>
+    <Log type="IIS">
+      <LocalPath>C:\Logs\IIS</LocalPath>
+      <FileNamePattern>
+      </FileNamePattern>
+    </Log>
+  </Logs>
+</Configuration>
