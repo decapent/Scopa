@@ -8,8 +8,7 @@
     </Log>
     <Log type="IIS">
       <LocalPath>C:\Logs\IIS</LocalPath>
-      <FileNamePattern>
-      </FileNamePattern>
+      <FileNamePattern></FileNamePattern>
     </Log>
   </Logs>
 </Configuration>
