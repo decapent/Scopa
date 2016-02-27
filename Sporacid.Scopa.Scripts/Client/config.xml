@@ -1,6 +1,6 @@
 <Configuration>
   <RemoteHost hostname="VMSPPLAV" destination="\\VMSPPLAV\raw" />
-  <LastScopaDate>2/20/2016 10:00:02 PM</LastScopaDate>
+  <LastScopaDate>2/22/2016 1:23:05 PM</LastScopaDate>
   <Logs>
     <Log type="SP2013">
       <LocalPath>C:\Logs\SP2013</LocalPath>

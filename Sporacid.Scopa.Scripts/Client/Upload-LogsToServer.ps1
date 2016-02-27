@@ -21,11 +21,13 @@ foreach($log in $logs) {
 	$stagingFolder = [string]::Format("{0}_{1}_{2}", $hostname, $log.Type, $timestamp)
 	New-Item -Type Directory -Path $stagingFolder -Force
 	
-	# Get the files and if IsIncremental, filter a first shot on the last write date.
+	# Get the files at the local path defined in configuration
 	$files = Get-ChildItem -Recurse -File -Path $log.LocalPath
+
+	# If Incremental fetch, filter a first shot on the last write date.
 	if ($IsIncremental.IsPresent) {
 		Write-Host "Incremental detected! File will be loaded from [$lastScopaDate] to this day!"
-		$files = $files | Where-Object {$_.LastWriteDate -ge $lastScopaDate}
+		$files = $files | Where-Object {$_.LastWriteDate.ToString() -ge $lastScopaDate}
 	}
 	
 	# Now match the regex pattern on the file name

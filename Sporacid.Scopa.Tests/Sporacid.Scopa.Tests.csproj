@@ -50,8 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SP2013LogStrategyTests.cs" />
+    <Compile Include="Strategies\LogStrategyFactoryTests.cs" />
+    <Compile Include="Strategies\SP2013LogStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scopa\Sporacid.Scopa.csproj">
+      <Project>{fd92f69f-cc72-45bd-b022-f3ddbf1b371a}</Project>
+      <Name>Sporacid.Scopa</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
