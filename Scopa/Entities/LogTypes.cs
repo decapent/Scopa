@@ -6,7 +6,6 @@
     public enum LogTypes
     {
         SharePoint2013,
-        IIS,
-        Twitter
+        IIS
     }
 }

@@ -16,6 +16,9 @@ namespace Sporacid.Scopa
         {
             var strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, @"C:\Logs\SP2013Logs");
             strategy.CreateLocalStagingDirectory("SP2013_Logs");
+
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, @"C:\Logs\IISLogs");
+            strategy.CreateLocalStagingDirectory("IIS_Logs");
             
             Console.ReadKey();
         }

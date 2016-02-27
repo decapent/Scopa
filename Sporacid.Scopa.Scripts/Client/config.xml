@@ -1,6 +1,6 @@
 <Configuration>
-  <RemoteHost hostname="VMSPPLAV" destination="\\VMSPPLAV\raw" />
-  <LastScopaDate>2/22/2016 1:23:05 PM</LastScopaDate>
+  <RemoteHost hostname="VMSPPLAV" destination="C:\Logs\Processed" />
+  <LastScopaDate>2/27/2016 5:07:08 PM</LastScopaDate>
   <Logs>
     <Log type="SP2013">
       <LocalPath>C:\Logs\SP2013</LocalPath>
@@ -8,7 +8,7 @@
     </Log>
     <Log type="IIS">
       <LocalPath>C:\Logs\IIS</LocalPath>
-      <FileNamePattern></FileNamePattern>
+      <FileNamePattern>^u_ex([\d]{6}).log$</FileNamePattern>
     </Log>
   </Logs>
 </Configuration>

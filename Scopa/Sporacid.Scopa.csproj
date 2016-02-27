@@ -43,11 +43,14 @@
   <ItemGroup>
     <Compile Include="Entities\BaseLogArchive.cs" />
     <Compile Include="Contracts\ILogStrategy.cs" />
+    <Compile Include="Entities\IISLogArchive.cs" />
     <Compile Include="LogStrategyFactory.cs" />
     <Compile Include="Entities\LogTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\SharePoint2013LogArchive.cs" />
+    <Compile Include="Entities\SP2013LogArchive.cs" />
+    <Compile Include="Strategies\BaseLogStrategy.cs" />
+    <Compile Include="Strategies\IISLogStrategy.cs" />
     <Compile Include="Strategies\SP2013LogStrategy.cs" />
   </ItemGroup>
   <ItemGroup>

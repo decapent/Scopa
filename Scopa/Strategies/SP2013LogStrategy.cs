@@ -10,24 +10,14 @@ namespace Sporacid.Scopa.Strategies
     /// <summary>
     /// Concrete strategy for SharePoint 2013 Log files processing. 
     /// </summary>
-    public class SP2013LogStrategy : ILogStrategy
+    public class SP2013LogStrategy : BaseLogStrategy
     {
-        /// <summary>
-        /// A SharePoint's 2013 Log archive
-        /// </summary>
-        public SharePoint2013LogArchive LogArchive { get; set; }
-
-        /// <summary>
-        /// The destination path
-        /// </summary>
-        public string DestinationPath { get; set; }
-
         /// <summary>
         /// Create a new SP2013LogStrategy
         /// </summary>
         /// <param name="logArchive">The SP2013 Log Archive</param>
         /// <param name="destinationPath">The destination path</param>
-        public SP2013LogStrategy(SharePoint2013LogArchive logArchive, string destinationPath)
+        public SP2013LogStrategy(SP2013LogArchive logArchive, string destinationPath)
         {
             this.LogArchive = logArchive;
             this.DestinationPath = destinationPath;
@@ -38,7 +28,7 @@ namespace Sporacid.Scopa.Strategies
         /// </summary>
         /// <param name="hiveTableName">The name of the hive table that will be used as staging</param>
         /// <returns>The full path to the local staging directory</returns>
-        public string CreateLocalStagingDirectory(string hiveTableName)
+        public override string CreateLocalStagingDirectory(string hiveTableName)
         {
             DirectoryInfo stagingDirectory = null;
             var stagingPath = string.Format("{0}\\{1}-staging", this.LogArchive.DataSourcePath, hiveTableName);
@@ -75,7 +65,7 @@ namespace Sporacid.Scopa.Strategies
         /// <summary>
         /// Push some files to HDFS
         /// </summary>
-        public void PushToHDFS()
+        public override void PushToHDFS()
         {
             throw new NotImplementedException();
         }

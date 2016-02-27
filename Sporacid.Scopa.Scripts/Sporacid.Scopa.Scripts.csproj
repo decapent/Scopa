@@ -42,11 +42,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Client\Create-DataUploadScheduledTask.ps1" />
-    <None Include="Client\Upload-LogsToServer.ps1" />
+    <None Include="Client\Create-DataUploadScheduledTask - Copy.ps1" />
+    <None Include="Client\Upload_LogsToServer.ps1" />
     <None Include="Server\Create-FolderArchitecture.ps1" />
     <None Include="Server\Deploy-HadoopData.ps1" />
-    <None Include="Client\Upload-LogsToServer.ps1" />
     <None Include="Server\Upload-HiveTables.ps1" />
   </ItemGroup>
   <ItemGroup>
