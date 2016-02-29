@@ -25,6 +25,15 @@ namespace Sporacid.Scopa.Strategies
         protected string HiveTableName { get; set; }
 
         /// <summary>
+        /// Abstract log strategy
+        /// </summary>
+        /// <param name="hiveTableName">The Hive table name</param>
+        protected BaseLogStrategy (string hiveTableName)
+        {
+            this.HiveTableName = hiveTableName;
+        }
+
+        /// <summary>
         /// Create a local staging directory from the archive path
         /// </summary>
         /// <param name="hiveTableName">The name of the hive table that will be used as staging</param>

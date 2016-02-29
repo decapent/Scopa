@@ -49,7 +49,9 @@
     <None Include="Server\Upload-HiveTables.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\config.xml" />
+    <Content Include="Client\config.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Server\config.xml" />
     <Content Include="Server\Create-HiveExternalTables.sql" />
   </ItemGroup>

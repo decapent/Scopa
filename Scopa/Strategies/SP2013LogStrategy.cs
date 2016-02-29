@@ -17,10 +17,10 @@ namespace Sporacid.Scopa.Strategies
         /// <param name="logArchive">The SP2013 Log Archive</param>
         /// <param name="destinationPath">The destination path</param>
         public SP2013LogStrategy(SP2013LogArchive logArchive, string destinationPath)
+            : base("SP2013_Logs")
         {
             this.LogArchive = logArchive;
             this.DestinationPath = destinationPath;
-            this.HiveTableName = "SP2013_Logs";
         }
 
         /// <summary>
