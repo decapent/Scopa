@@ -14,20 +14,21 @@ namespace Sporacid.Scopa
         /// </summary>
         /// <param name="logType">The type of log to create</param>
         /// <param name="dataSourcePath">The path to the repository of unprocessed file</param>
+        /// <param name="destinationPath">The path to the repository of processed file</param>
         /// <returns>A concrete log strategy</returns>
-        public static BaseLogStrategy CreateStrategy(LogTypes logType, string dataSourcePath)
+        public static BaseLogStrategy CreateStrategy(LogTypes logType, string dataSourcePath, string destinationPath)
         {
             BaseLogStrategy strategy = null;
 
-            if (!string.IsNullOrEmpty(dataSourcePath))
+            if (!string.IsNullOrEmpty(dataSourcePath) && !string.IsNullOrEmpty(destinationPath))
             {
                 switch (logType)
                 {
                     case LogTypes.SharePoint2013:
-                        strategy = CreateSP2013Strategy(dataSourcePath);
+                        strategy = CreateSP2013Strategy(dataSourcePath, destinationPath);
                         break;
                     case LogTypes.IIS:
-                        strategy = CreateIISStrategy(dataSourcePath);
+                        strategy = CreateIISStrategy(dataSourcePath, destinationPath);
                         break;
                     default:
                         break;
@@ -37,16 +38,16 @@ namespace Sporacid.Scopa
             return strategy;
         }
 
-        private static SP2013LogStrategy CreateSP2013Strategy(string dataSourcePath)
+        private static SP2013LogStrategy CreateSP2013Strategy(string dataSourcePath, string destinationPath)
         {
             var archive = new SP2013LogArchive(dataSourcePath);
-            return new SP2013LogStrategy(archive, "SP2013_Logs");
+            return new SP2013LogStrategy(archive, destinationPath);
         }
 
-        private static IISLogStrategy CreateIISStrategy(string dataSourcePath)
+        private static IISLogStrategy CreateIISStrategy(string dataSourcePath, string destinationPath)
         {
             var archive = new IISLogArchive(dataSourcePath);
-            return new IISLogStrategy(archive, "IIS_Logs");
+            return new IISLogStrategy(archive, destinationPath);
         }
     }
 }

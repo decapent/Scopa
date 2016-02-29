@@ -1,4 +1,5 @@
-﻿using Sporacid.Scopa.Entities;
+﻿using Sporacid.Scopa.Contracts;
+using Sporacid.Scopa.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,18 +10,18 @@ namespace Sporacid.Scopa.Strategies
     /// <summary>
     /// Concrete strategy for SharePoint 2013 Log files processing. 
     /// </summary>
-    public class SP2013LogStrategy : BaseLogStrategy
+    public class IISLogStrategy : BaseLogStrategy
     {
         /// <summary>
         /// Create a new SP2013LogStrategy
         /// </summary>
         /// <param name="logArchive">The SP2013 Log Archive</param>
         /// <param name="destinationPath">The destination path</param>
-        public SP2013LogStrategy(SP2013LogArchive logArchive, string destinationPath)
+        public IISLogStrategy(IISLogArchive logArchive, string destinationPath)
         {
             this.LogArchive = logArchive;
             this.DestinationPath = destinationPath;
-            this.HiveTableName = "SP2013_Logs";
+            this.HiveTableName = "IIS_Logs";
         }
 
         /// <summary>
@@ -46,9 +47,7 @@ namespace Sporacid.Scopa.Strategies
 
                     if (HDFSIndexes.ToList().Count > 0)
                     {
-                        var fileDestination = this.EnsureHDFSIndexes(stagingDirectory.FullName, HDFSIndexes);
-
-                        if(!Directory.Exists(this.DestinationPath))
+                        if (!Directory.Exists(this.DestinationPath))
                         {
                             Directory.CreateDirectory(this.DestinationPath);
                         }
@@ -78,10 +77,10 @@ namespace Sporacid.Scopa.Strategies
         }
 
         /// <summary>
-        /// 
+        /// Creates the folder architecture based on the HDFS indexes collection
         /// </summary>
-        /// <param name="stagingDirectoryPath"></param>
-        /// <param name="HDFSIndexes"></param>
+        /// <param name="stagingDirectoryPath">The folder path to the staging directory</param>
+        /// <param name="HDFSIndexes">The ordered collection of HDFS indexes</param>
         /// <returns></returns>
         protected override string EnsureHDFSIndexes(string stagingDirectoryPath, IEnumerable<string> HDFSIndexes)
         {
@@ -99,30 +98,27 @@ namespace Sporacid.Scopa.Strategies
         }
 
         /// <summary>
-        /// 
+        /// Extract the HDFS Indexes definition for an IIS log.
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">The IIS log file name under processing</param>
         /// <returns></returns>
         protected override IEnumerable<string> FetchHDFSIndexesName(string fileName)
         {
             var HDFSIndexes = new List<string>();
 
-            // Hostname can be extracted directly from the archive file name
+            // Hostname can be retrieved directly from the archive file name
             // since file name is following HOSTNAME_LOGTYPE_TIMESTAMP nomenclature
             var hostName = this.LogArchive.DataSourcePath.Substring(this.LogArchive.DataSourcePath.LastIndexOf("\\") + 1).Split('_')[0];
 
-            // logdate can be obtained from the file directly as the second last information
-            var fileNameSegments = fileName.Split('_').ToList();
-            if (fileNameSegments.Count > 2)
-            {
-                var logDate = fileNameSegments[fileNameSegments.Count - 2];
+            // logdate can be obtained from the file directly and is the only relevant information
+            // contained within the file name
+            var logDate = fileName.ToCharArray().Where(c => Char.IsDigit(c)).ToString();
 
-                // Build the index and add it to the HDFS Index list
-                hostName = string.Format("hostname={0}", hostName);
-                logDate = string.Format("logdate={0}", logDate);
-                HDFSIndexes.Add(hostName);
-                HDFSIndexes.Add(logDate);
-            }
+            // Build the index and add it to the HDFS Index list
+            hostName = string.Format("hostname={0}", hostName);
+            logDate = string.Format("logdate={0}", logDate);
+            HDFSIndexes.Add(hostName);
+            HDFSIndexes.Add(logDate);
 
             return HDFSIndexes;
         }

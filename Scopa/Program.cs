@@ -14,12 +14,13 @@ namespace Sporacid.Scopa
         /// <param name="args">The supplied arguments</param>
         public static void Main(string[] args)
         {
-            var strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, @"C:\Logs\SP2013Logs");
-            strategy.CreateLocalStagingDirectory("SP2013_Logs");
+            var strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, @"C:\Logs\VMSPPLAV_SP2013_20160228012426", @"C:\Processed\SP2013");
+            strategy.CreateLocalStagingDirectory();
 
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, @"C:\Logs\IISLogs");
-            strategy.CreateLocalStagingDirectory("IIS_Logs");
-            
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, @"C:\Logs\VMSPPLAV_IIS_20160228012426", @"C:\Processed\IISLogs");
+            strategy.CreateLocalStagingDirectory();
+                        
+            Console.WriteLine("\nDone Processing the files !!!\n");
             Console.ReadKey();
         }
     }

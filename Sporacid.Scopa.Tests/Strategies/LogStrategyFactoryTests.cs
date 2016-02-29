@@ -12,6 +12,8 @@ namespace Sporacid.Scopa.Tests.Strategies
     [TestClass]
     public class LogStrategyFactoryTests
     {
+        public const string DESTINATION_PATH = @"C:\Processed\Test";
+
         /// <summary>
         /// Tests that a SharePoint 2013 logging strategy is created fully hydrated
         /// </summary>
@@ -24,7 +26,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             string dataSourcePath = "SP2013_Logs";
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, dataSourcePath);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, dataSourcePath, DESTINATION_PATH);
 
             // Asssert
             Assert.IsNotNull(strategy);
@@ -47,7 +49,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             BaseLogStrategy strategy = null;
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, string.Empty);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, string.Empty, DESTINATION_PATH);
 
             // Assert
             Assert.IsNull(strategy);
@@ -65,7 +67,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             string dataSourcePath = "IIS_Logs";
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, dataSourcePath);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, dataSourcePath, DESTINATION_PATH);
 
             // Asssert
             Assert.IsNotNull(strategy);
@@ -88,7 +90,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             BaseLogStrategy strategy = null;
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, string.Empty);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, string.Empty, DESTINATION_PATH);
 
             // Assert
             Assert.IsNull(strategy);
