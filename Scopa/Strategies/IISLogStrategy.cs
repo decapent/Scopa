@@ -62,7 +62,7 @@ namespace Sporacid.Scopa.Strategies
             }
             catch (IOException ioex)
             {
-                Console.WriteLine(ioex);
+                Console.WriteLine(string.Format("IISLogStrategy.CreateLocalStaging --> {0}", ioex));
             }
 
             return stagingDirectory.FullName;
