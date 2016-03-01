@@ -12,6 +12,7 @@ namespace Sporacid.Scopa.Tests.Strategies
     [TestClass]
     public class LogStrategyFactoryTests
     {
+        public const string DATASOURCE_PATH = @"C:\Raw\Test";
         public const string DESTINATION_PATH = @"C:\Processed\Test";
 
         /// <summary>
@@ -23,10 +24,9 @@ namespace Sporacid.Scopa.Tests.Strategies
         {
             // Arrange
             BaseLogStrategy strategy = null;
-            string dataSourcePath = "SP2013_Logs";
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, dataSourcePath, DESTINATION_PATH);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, DATASOURCE_PATH, DESTINATION_PATH);
 
             // Asssert
             Assert.IsNotNull(strategy);
@@ -35,7 +35,8 @@ namespace Sporacid.Scopa.Tests.Strategies
             Assert.IsNotNull(strategy.LogArchive);
             Assert.IsInstanceOfType(strategy.LogArchive, typeof(SP2013LogArchive));
 
-            Assert.AreEqual<string>(dataSourcePath, strategy.LogArchive.DataSourcePath);
+            Assert.AreEqual<string>(DATASOURCE_PATH, strategy.LogArchive.DataSourcePath);
+            Assert.AreEqual<string>(DESTINATION_PATH, strategy.DestinationPath);
         }
 
         /// <summary>
@@ -43,16 +44,30 @@ namespace Sporacid.Scopa.Tests.Strategies
         /// </summary>
         [TestMethod]
         [TestCategory("Factory")]
-        public void WhenCreatingSP2013Strategy_WithoutDataSourcePath_ShouldNotCreateStrategy()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WhenCreatingSP2013Strategy_WithEmptyDataSourcePath_ShouldThrowArgumentNullException()
         {
             // Arrange
             BaseLogStrategy strategy = null;
 
             // Act
             strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, string.Empty, DESTINATION_PATH);
+        }
 
-            // Assert
-            Assert.IsNull(strategy);
+
+        /// <summary>
+        /// Tests that a SharePoint 2013 logging strategy cannot be created without a proper data source path
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Factory")]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WhenCreatingSP2013Strategy_WithEmptyDestinationPath_ShouldThrowArgumentNullException()
+        {
+            // Arrange
+            BaseLogStrategy strategy = null;
+
+            // Act
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, DATASOURCE_PATH, string.Empty);
         }
 
         /// <summary>
@@ -64,10 +79,9 @@ namespace Sporacid.Scopa.Tests.Strategies
         {
             // Arrange
             BaseLogStrategy strategy = null;
-            string dataSourcePath = "IIS_Logs";
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, dataSourcePath, DESTINATION_PATH);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, DATASOURCE_PATH, DESTINATION_PATH);
 
             // Asssert
             Assert.IsNotNull(strategy);
@@ -76,7 +90,8 @@ namespace Sporacid.Scopa.Tests.Strategies
             Assert.IsNotNull(strategy.LogArchive);
             Assert.IsInstanceOfType(strategy.LogArchive, typeof(IISLogArchive));
 
-            Assert.AreEqual<string>(dataSourcePath, strategy.LogArchive.DataSourcePath);
+            Assert.AreEqual<string>(DATASOURCE_PATH, strategy.LogArchive.DataSourcePath);
+            Assert.AreEqual<string>(DESTINATION_PATH, strategy.DestinationPath);
         }
 
         /// <summary>
@@ -84,16 +99,29 @@ namespace Sporacid.Scopa.Tests.Strategies
         /// </summary>
         [TestMethod]
         [TestCategory("Factory")]
-        public void WhenCreatingIISStrategy_WithoutDataSourcePath_ShouldNotCreateStrategy()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WhenCreatingIISStrategy_WithoutDataSourcePath_ShouldThrowArgumentNullException()
         {
             // Arrange
             BaseLogStrategy strategy = null;
 
             // Act
             strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, string.Empty, DESTINATION_PATH);
+        }
 
-            // Assert
-            Assert.IsNull(strategy);
+        /// <summary>
+        /// Tests that an IIS logging strategy cannot be created without a proper data source path
+        /// </summary>
+        [TestMethod]
+        [TestCategory("Factory")]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void WhenCreatingIISStrategy_WithoutDestinationPath_ShouldThrowArgumentNullException()
+        {
+            // Arrange
+            BaseLogStrategy strategy = null;
+
+            // Act
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, DATASOURCE_PATH, string.Empty);
         }
     }
 }

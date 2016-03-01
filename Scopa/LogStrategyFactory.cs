@@ -1,4 +1,5 @@
-﻿using Sporacid.Scopa.Contracts;
+﻿using System;
+using Sporacid.Scopa.Contracts;
 using Sporacid.Scopa.Entities;
 using Sporacid.Scopa.Strategies;
 
@@ -18,21 +19,22 @@ namespace Sporacid.Scopa
         /// <returns>A concrete log strategy</returns>
         public static BaseLogStrategy CreateStrategy(LogTypes logType, string dataSourcePath, string destinationPath)
         {
-            BaseLogStrategy strategy = null;
-
-            if (!string.IsNullOrEmpty(dataSourcePath) && !string.IsNullOrEmpty(destinationPath))
+            if (string.IsNullOrEmpty(dataSourcePath) || string.IsNullOrEmpty(destinationPath))
             {
-                switch (logType)
-                {
-                    case LogTypes.SP2013:
-                        strategy = CreateSP2013Strategy(dataSourcePath, destinationPath);
-                        break;
-                    case LogTypes.IIS:
-                        strategy = CreateIISStrategy(dataSourcePath, destinationPath);
-                        break;
-                    default:
-                        break;
-                }
+                throw new ArgumentNullException("LogStrategyFactory.CreateStrategy: Null//Empty DataSourcePath or DestinationPath parameters supplied!");
+            }
+
+            BaseLogStrategy strategy = null;
+            switch (logType)
+            {
+                case LogTypes.SP2013:
+                    strategy = CreateSP2013Strategy(dataSourcePath, destinationPath);
+                    break;
+                case LogTypes.IIS:
+                    strategy = CreateIISStrategy(dataSourcePath, destinationPath);
+                    break;
+                default:
+                    break;
             }
 
             return strategy;
