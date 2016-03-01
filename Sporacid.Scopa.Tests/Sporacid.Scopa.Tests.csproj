@@ -51,7 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Strategies\LogStrategyFactoryTests.cs" />
-    <Compile Include="Strategies\SP2013LogStrategyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
