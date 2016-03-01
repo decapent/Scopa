@@ -32,7 +32,7 @@ namespace Sporacid.Scopa.Strategies
         public override string CreateLocalStagingDirectory()
         {
             DirectoryInfo stagingDirectory = null;
-            var stagingPath = string.Format("{0}\\{1}-staging", this.LogArchive.DataSourcePath, this.HiveTableName);
+            var stagingPath = string.Format("{0}\\staging\\{1}", this.LogArchive.DataSourcePath, this.HiveTableName);
 
             try
             {
@@ -47,13 +47,15 @@ namespace Sporacid.Scopa.Strategies
 
                     if (HDFSIndexes.ToList().Count > 0)
                     {
+                        var fileDestination = this.EnsureHDFSIndexes(stagingDirectory.FullName, HDFSIndexes);
+
                         if (!Directory.Exists(this.DestinationPath))
                         {
                             Directory.CreateDirectory(this.DestinationPath);
                         }
 
-                        var source = Path.Combine(Environment.CurrentDirectory, fileName);
-                        var destination = Path.Combine(this.DestinationPath, fileName);
+                        var source = Path.Combine(this.LogArchive.DataSourcePath, fileName);
+                        var destination = Path.Combine(fileDestination, fileName);
 
                         File.Copy(source, destination, true);
                         Console.WriteLine("Moved [{0}] to [{1}]", source, destination);

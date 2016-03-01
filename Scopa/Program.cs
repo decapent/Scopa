@@ -1,5 +1,6 @@
 ﻿using System;
 using Sporacid.Scopa.Entities;
+using System.IO;
 
 namespace Sporacid.Scopa
 {
@@ -14,14 +15,35 @@ namespace Sporacid.Scopa
         /// <param name="args">The supplied arguments</param>
         public static void Main(string[] args)
         {
-            var strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, @"C:\Logs\VMSPPLAV_SP2013_20160228012426", @"C:\Processed\SP2013");
-            strategy.CreateLocalStagingDirectory();
+            string rawArchiveRepositoryPath = @"C:\HDInsight\raw";
+            string processedArchiveRepositoryPath = @"C:\HDInsight\processed";
+            
+            // List all the archives to be processed
+            var archivesToProcess = Directory.EnumerateDirectories(rawArchiveRepositoryPath);
+            foreach(var rawArchive in archivesToProcess)
+            {
+                // Extract Archive name from path
+                var archiveName = rawArchive.Substring(rawArchive.LastIndexOf('\\') + 1);
+                
+                // Build needed parameters for Strategy Factory
+                var logType = ParseEnum<LogTypes>(archiveName.Split('_')[1]);
+                var sourcePath = string.Format("{0}\\{1}", rawArchiveRepositoryPath, archiveName);
+                var destinationPath = string.Format("{0}\\{1}", processedArchiveRepositoryPath, logType.ToString());
 
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.IIS, @"C:\Logs\VMSPPLAV_IIS_20160228012426", @"C:\Processed\IISLogs");
-            strategy.CreateLocalStagingDirectory();
-                        
+                // Instantiate the strategy
+                var strategy = LogStrategyFactory.CreateStrategy(logType, sourcePath, destinationPath);
+
+                // Process the archive
+                strategy.CreateLocalStagingDirectory();
+            }    
+
             Console.WriteLine("\nDone Processing the files !!!\n");
             Console.ReadKey();
+        }
+
+        private static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
         }
     }
 }

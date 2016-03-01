@@ -26,7 +26,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             string dataSourcePath = "SP2013_Logs";
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, dataSourcePath, DESTINATION_PATH);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, dataSourcePath, DESTINATION_PATH);
 
             // Asssert
             Assert.IsNotNull(strategy);
@@ -49,7 +49,7 @@ namespace Sporacid.Scopa.Tests.Strategies
             BaseLogStrategy strategy = null;
 
             // Act
-            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SharePoint2013, string.Empty, DESTINATION_PATH);
+            strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, string.Empty, DESTINATION_PATH);
 
             // Assert
             Assert.IsNull(strategy);

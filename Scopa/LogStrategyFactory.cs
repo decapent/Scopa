@@ -24,7 +24,7 @@ namespace Sporacid.Scopa
             {
                 switch (logType)
                 {
-                    case LogTypes.SharePoint2013:
+                    case LogTypes.SP2013:
                         strategy = CreateSP2013Strategy(dataSourcePath, destinationPath);
                         break;
                     case LogTypes.IIS:

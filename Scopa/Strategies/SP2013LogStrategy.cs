@@ -53,7 +53,7 @@ namespace Sporacid.Scopa.Strategies
                             Directory.CreateDirectory(this.DestinationPath);
                         }
 
-                        var source = Path.Combine(Environment.CurrentDirectory, fileName);
+                        var source = Path.Combine(this.LogArchive.DataSourcePath, fileName);
                         var destination = Path.Combine(this.DestinationPath, fileName);
 
                         File.Copy(source, destination, true);

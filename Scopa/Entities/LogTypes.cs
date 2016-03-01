@@ -5,7 +5,7 @@
     /// </summary>
     public enum LogTypes
     {
-        SharePoint2013,
+        SP2013,
         IIS
     }
 }

@@ -12,7 +12,7 @@ namespace Sporacid.Scopa.Entities
         /// </summary>
         /// <param name="DataSourcePath">Path to repository of unprocesssed SP2013 log file</param>
         public SP2013LogArchive(string DataSourcePath)
-            : base(LogTypes.SharePoint2013)
+            : base(LogTypes.SP2013)
         {
             this.DataSourcePath = DataSourcePath;
             this.ArchiveDate = DateTime.Now;
