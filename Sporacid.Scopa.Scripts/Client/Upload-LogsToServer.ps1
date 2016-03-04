@@ -27,18 +27,20 @@ Param (
 )
 
 # Needed for file archiving
-[Reflection.Assembly]::LoadWithPartialName( "System.IO.Compression.FileSystem" )
+[Reflection.Assembly]::LoadWithPartialName("System.IO.Compression.FileSystem")
 
 # Archive infos
 $hostname = $env:computername
 $timestamp = (Get-Date -Format "yyyyMMddhhmmss")
+$isScopaCompleted = $false
 
 # Scopa Client configuration
 $configPath = Resolve-Path ".\config.xml"
 [xml]$xml = Get-Content -Path $configPath -Encoding "UTF8"
+
+$logs = $xml.Configuration.Logs
 $lastScopaDate = $xml.Configuration.LastScopaDate
 $destination = $xml.Configuration.RemoteHost.Destination
-$logs = $xml.Configuration.Logs
 
 Try 
 {
@@ -55,7 +57,7 @@ Try
 		$files = Get-ChildItem -Recurse -File -Path $log.LocalPath
 		if ($Incremental.IsPresent) 
 		{
-			Write-Host "WARNING: Incremental parameter detected! Files will be loaded from [$lastScopaDate] up to this day!" -ForegroundColor Yellow
+			Write-Warning "Incremental parameter detected! Files will be loaded from [$lastScopaDate] up to this day!" -ForegroundColor Yellow
 			$files = $files | Where-Object {$_.LastWriteTime -ge $lastScopaDate}
 		}
 	
@@ -73,7 +75,7 @@ Try
 				# For matching files, move them to staging folder
 			    if($file.Name -match $log.FileNamePattern) 
 			    {
-				    Write-Host "Moving [$file] to staging folder"
+				    Write-Host "Copying [$file] to staging folder"
 				    Copy-Item -Path $file.FullName -Destination $stagingFolderPath
 			    }
 		    }
@@ -98,14 +100,16 @@ Try
 	        }
 	        else
 	        {
-		        Write-Host "WARNING: Staging environment is still on disk... cleanup will need to be done manually!!" -ForegroundColor Yellow
+		        Write-Warning "Staging environment is still on disk... cleanup will need to be done manually!!" -ForegroundColor Yellow
 	        }
         }
         else
         {
-            Write-Host "WARNING: No files to process! Either the log directory is EMPTY or the last INCREMENTAL date filters all the files..." -ForegroundColor Yellow
+            Write-Warning "No files to process! Either the log directory is EMPTY or the last INCREMENTAL date filters all the files..." -ForegroundColor Yellow
         }
 	}
+
+	$isScopaCompleted = $true
 }
 Catch
 {
@@ -113,7 +117,10 @@ Catch
 }
 Finally
 {
-    # Update the last Scopa date for incremental config
-	$xml.Configuration.LastScopaDate = (Get-Date).ToString()
-	$xml.Save($configPath)
+	if($isScopaCompleted)
+	{
+		# Update the last Scopa date for incremental config
+		$xml.Configuration.LastScopaDate = (Get-Date).ToString()
+		$xml.Save($configPath)
+	}
 }
