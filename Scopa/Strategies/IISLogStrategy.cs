@@ -114,7 +114,7 @@ namespace Sporacid.Scopa.Strategies
 
             // logdate can be obtained from the file directly and is the only relevant information
             // contained within the file name
-            var logDate = fileName.ToCharArray().Where(c => Char.IsDigit(c)).ToString();
+            var logDate = this.ExtractLogDateFromFileName(fileName);
 
             // Build the index and add it to the HDFS Index list
             hostName = string.Format("hostname={0}", hostName);
@@ -123,6 +123,20 @@ namespace Sporacid.Scopa.Strategies
             HDFSIndexes.Add(logDate);
 
             return HDFSIndexes;
+        }
+
+        private string ExtractLogDateFromFileName(string filename)
+        {
+            string logDate = string.Empty;
+            foreach(char c in filename)
+            {
+                if(Char.IsDigit(c))
+                {
+                    logDate += c;
+                }
+            }
+
+            return logDate;
         }
     }
 }

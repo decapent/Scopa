@@ -1,0 +1,14 @@
+<Configuration>
+  <RemoteHost hostname="[[DSP_RemoteHostName]]" destination="[[DSP_RemoteHostDestination]]" />
+  <LastScopaDate>[[DSP_LastScopaDate]]</LastScopaDate>
+  <Logs>
+    <Log type="SP2013">
+      <LocalPath>[[DSP_SP2013_LogsLocalPath]]</LocalPath>
+      <FileNamePattern>[[DSP_SP2013_LogsFileNamePattern]]</FileNamePattern>
+    </Log>
+    <Log type="IIS">
+      <LocalPath>[[DSP_IIS_LogsLocalPath]]</LocalPath>
+      <FileNamePattern>[[DSP_IIS_LogsFileNamePattern]]</FileNamePattern>
+    </Log>
+  </Logs>
+</Configuration>

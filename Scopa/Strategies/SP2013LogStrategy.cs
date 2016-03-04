@@ -31,7 +31,7 @@ namespace Sporacid.Scopa.Strategies
         public override string CreateLocalStagingDirectory()
         {
             DirectoryInfo stagingDirectory = null;
-            var stagingPath = string.Format("{0}\\{1}-staging", this.LogArchive.DataSourcePath, this.HiveTableName);
+            var stagingPath = string.Format("{0}\\staging\\{1}", this.LogArchive.DataSourcePath, this.HiveTableName);
 
             try
             {
