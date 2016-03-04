@@ -1,3 +1,9 @@
+# =============================
+# Scopa Client Deployment
+# =============================
+$DSP_SCOPACLIENT_TASKPATH = "\Sporacid\Scopa"
+$DSP_SCOPACLIENT_DEPLOYMENTFOLDER = "C:\ScopaClient"
+
 # ============================
 # Remote host configuration
 # ============================

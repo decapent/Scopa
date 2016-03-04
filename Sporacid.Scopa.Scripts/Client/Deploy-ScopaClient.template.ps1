@@ -1,3 +1,17 @@
+<#
+    .SYNOPSIS
+        Deploys and register the Scopa client scheduled task
+   
+    .PARAMETER  TaskPath
+        For an Incremental Scopa based on the date of the last archiving
+        
+    .EXAMPLE
+        PS C:\Scripts> Deploy-ScopaClient.ps1 -TaskPath "MyPath\MySubPath"
+
+    .OUTPUTS
+        A processed zip filed containing at least 1 file uploaded to a remote host 
+		configured via the config.xml
+#>
 [CmdletBinding()]
 Param(
 	[string]$TaskPath="[[DSP_SCOPACLIENT_TASKPATH]]"
