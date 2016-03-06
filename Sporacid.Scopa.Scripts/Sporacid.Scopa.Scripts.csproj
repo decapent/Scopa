@@ -44,16 +44,12 @@
   <ItemGroup>
     <None Include="Client\Create-DataUploadScheduledTask - Copy.ps1" />
     <None Include="Client\Upload-LogsToServer.ps1" />
-    <None Include="Server\Create-FolderArchitecture.ps1" />
-    <None Include="Server\Deploy-HadoopData.ps1" />
-    <None Include="Server\Upload-HiveTables.ps1" />
+    <None Include="Tokens.vmspplav.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\config.xml">
+    <Content Include="Client\config.template.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Server\config.xml" />
-    <Content Include="Server\Create-HiveExternalTables.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

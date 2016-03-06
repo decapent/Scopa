@@ -15,8 +15,8 @@ namespace Sporacid.Scopa
         /// <param name="args">The supplied arguments</param>
         public static void Main(string[] args)
         {
-            string rawArchiveRepositoryPath = @"C:\HDInsight\raw";
-            string processedArchiveRepositoryPath = @"C:\HDInsight\processed";
+            string rawArchiveRepositoryPath = @"E:\raw";
+            string processedArchiveRepositoryPath = @"E:\processed";
             
             // List all the archives to be processed
             var archivesToProcess = Directory.EnumerateDirectories(rawArchiveRepositoryPath);
