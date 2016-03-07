@@ -1,4 +1,5 @@
 ﻿using System;
+using Sporacid.Scopa.Entities.Enums;
 
 namespace Sporacid.Scopa.Entities
 {

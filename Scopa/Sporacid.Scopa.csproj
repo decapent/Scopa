@@ -46,7 +46,7 @@
     <Compile Include="Entities\IISLogArchive.cs" />
     <Compile Include="Entities\WindowsLogArchive.cs" />
     <Compile Include="LogStrategyFactory.cs" />
-    <Compile Include="Entities\LogTypes.cs" />
+    <Compile Include="Entities\Enums.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\SP2013LogArchive.cs" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sporacid.Scopa.Contracts;
 using Sporacid.Scopa.Entities;
+using Sporacid.Scopa.Entities.Enums;
 using Sporacid.Scopa.Strategies;
 
 namespace Sporacid.Scopa.Tests.Strategies
@@ -53,7 +53,6 @@ namespace Sporacid.Scopa.Tests.Strategies
             // Act
             strategy = LogStrategyFactory.CreateStrategy(LogTypes.SP2013, string.Empty, DESTINATION_PATH);
         }
-
 
         /// <summary>
         /// Tests that a SharePoint 2013 logging strategy cannot be created without a proper data source path

@@ -1,24 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sporacid.Scopa.Entities.Enums;
 
 namespace Sporacid.Scopa.Entities
 {
     /// <summary>
-    /// 
+    /// A Windows repository of unprocessed log files.
     /// </summary>
     public class WindowsLogArchive : BaseLogArchive
     {
         /// <summary>
-        /// Create a new instance of a SharePoint2013LogArchive
+        /// The windows event type that was retrieved
         /// </summary>
-        /// <param name="DataSourcePath">Path to repository of unprocesssed SP2013 log file</param>
-        public WindowsLogArchive(string DataSourcePath)
+        public WindowsEventTypes EventType { get; set; }
+
+        /// <summary>
+        /// Create a new instance of a Windows event Log Archive
+        /// </summary>
+        /// <param name="eventType">The windows event type of the archive</param>
+        /// <param name="dataSourcePath">Path to repository of unprocesssed Windows event log files</param>
+        public WindowsLogArchive(WindowsEventTypes eventType, string dataSourcePath)
             : base(LogTypes.Windows)
         {
-            this.DataSourcePath = DataSourcePath;
+            this.EventType = eventType;
+            this.DataSourcePath = dataSourcePath;
             this.ArchiveDate = DateTime.Now;
         }
     }

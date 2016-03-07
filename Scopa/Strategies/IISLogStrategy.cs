@@ -1,14 +1,13 @@
-﻿using Sporacid.Scopa.Contracts;
-using Sporacid.Scopa.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Sporacid.Scopa.Entities;
 
 namespace Sporacid.Scopa.Strategies
 {
     /// <summary>
-    /// Concrete strategy for SharePoint 2013 Log files processing. 
+    /// Concrete strategy for IIS Log files processing. 
     /// </summary>
     public class IISLogStrategy : BaseLogStrategy
     {
@@ -27,7 +26,6 @@ namespace Sporacid.Scopa.Strategies
         /// <summary>
         /// Create a local staging directory from the archive path
         /// </summary>
-        /// <param name="hiveTableName">The name of the hive table that will be used as staging</param>
         /// <returns>The full path to the local staging directory</returns>
         public override string CreateLocalStagingDirectory()
         {
@@ -79,31 +77,10 @@ namespace Sporacid.Scopa.Strategies
         }
 
         /// <summary>
-        /// Creates the folder architecture based on the HDFS indexes collection
+        /// Retrieves the HDFS folder index from the file name
         /// </summary>
-        /// <param name="stagingDirectoryPath">The folder path to the staging directory</param>
-        /// <param name="HDFSIndexes">The ordered collection of HDFS indexes</param>
-        /// <returns></returns>
-        protected override string EnsureHDFSIndexes(string stagingDirectoryPath, IEnumerable<string> HDFSIndexes)
-        {
-            var fullIndexPath = stagingDirectoryPath;
-            foreach (var index in HDFSIndexes)
-            {
-                fullIndexPath = string.Format("{0}\\{1}", fullIndexPath, index);
-                if (!Directory.Exists(fullIndexPath))
-                {
-                    Directory.CreateDirectory(fullIndexPath);
-                }
-            }
-
-            return fullIndexPath;
-        }
-
-        /// <summary>
-        /// Extract the HDFS Indexes definition for an IIS log.
-        /// </summary>
-        /// <param name="fileName">The IIS log file name under processing</param>
-        /// <returns></returns>
+        /// <param name="fileName">The name of the log file</param>
+        /// <returns>An ordered list of the HDFS indexes</returns>
         protected override IEnumerable<string> FetchHDFSIndexesName(string fileName)
         {
             var HDFSIndexes = new List<string>();
@@ -125,18 +102,30 @@ namespace Sporacid.Scopa.Strategies
             return HDFSIndexes;
         }
 
-        private string ExtractLogDateFromFileName(string filename)
+        /// <summary>
+        /// Ensure the staging folder indexes as directories
+        /// </summary>
+        /// <param name="stagingDirectoryPath">The staging directory disk path</param>
+        /// <param name="HDFSIndexes">An ordered list of the indexes to ensure</param>
+        /// <returns>The fully qualified path to copy the log file being processed</returns>
+        protected override string EnsureHDFSIndexes(string stagingDirectoryPath, IEnumerable<string> HDFSIndexes)
         {
-            string logDate = string.Empty;
-            foreach(char c in filename)
+            var fullIndexPath = stagingDirectoryPath;
+            foreach (var index in HDFSIndexes)
             {
-                if(Char.IsDigit(c))
+                fullIndexPath = string.Format("{0}\\{1}", fullIndexPath, index);
+                if (!Directory.Exists(fullIndexPath))
                 {
-                    logDate += c;
+                    Directory.CreateDirectory(fullIndexPath);
                 }
             }
 
-            return logDate;
+            return fullIndexPath;
+        }
+
+        private string ExtractLogDateFromFileName(string filename)
+        {
+            return filename.Where(c => char.IsDigit(c)).ToString();
         }
     }
 }

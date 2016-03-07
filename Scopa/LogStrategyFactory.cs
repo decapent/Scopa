@@ -1,6 +1,7 @@
 ﻿using System;
 using Sporacid.Scopa.Contracts;
 using Sporacid.Scopa.Entities;
+using Sporacid.Scopa.Entities.Enums;
 using Sporacid.Scopa.Strategies;
 
 namespace Sporacid.Scopa

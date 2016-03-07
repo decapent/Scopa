@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Sporacid.Scopa.Tests.Strategies
 {
@@ -13,16 +11,16 @@ namespace Sporacid.Scopa.Tests.Strategies
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
-        ///</summary>
+        /// </summary>
         public TestContext TestContext
         {
             get
             {
-                return testContextInstance;
+                return this.testContextInstance;
             }
             set
             {
-                testContextInstance = value;
+               this.testContextInstance = value;
             }
         }
 
@@ -40,17 +38,17 @@ namespace Sporacid.Scopa.Tests.Strategies
         [ClassCleanup()]
         public static void MyClassCleanup() { }
         
-
         [TestInitialize()]
         public void MyTestInitialize() 
         {
+            /*
             for (int i = 0; i < NB_FILES_UNDERTEST; i++)
             {
                 var filePath = Path.Combine(testStaging, string.Format("SP2013LogStrategyTest{0}.log", i));
                 var streamWriter = File.CreateText(filePath);
                 streamWriter.WriteLine("SP2013LogStrategy.TestInitialize -> " + i);
                 streamWriter.Dispose();
-            }
+            }*/
         }
 
         [TestCleanup()]
@@ -58,8 +56,8 @@ namespace Sporacid.Scopa.Tests.Strategies
         { 
         
         }
-        #endregion
 
+        #endregion
         #region Test Methods
         [TestMethod]
         [TestCategory("LogStrategy")]

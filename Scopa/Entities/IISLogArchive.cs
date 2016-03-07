@@ -1,4 +1,5 @@
 ﻿using System;
+using Sporacid.Scopa.Entities.Enums;
 
 namespace Sporacid.Scopa.Entities
 {
@@ -8,7 +9,7 @@ namespace Sporacid.Scopa.Entities
     public class IISLogArchive : BaseLogArchive
     {
         /// <summary>
-        /// Create a new instance of a SharePoint2013LogArchive
+        /// Create a new instance of an IIS LogArchive
         /// </summary>
         /// <param name="DataSourcePath">Path to repository of unprocesssed SP2013 log file</param>
         public IISLogArchive(string DataSourcePath)

@@ -1,11 +1,11 @@
-﻿using Sporacid.Scopa.Contracts;
+﻿using System.Collections.Generic;
+using Sporacid.Scopa.Contracts;
 using Sporacid.Scopa.Entities;
-using System.Collections.Generic;
 
 namespace Sporacid.Scopa.Strategies
 {
     /// <summary>
-    /// Abstraction of a lof strategy that implements the ILogStrategy contract
+    /// Abstraction of a log strategy entity that implements the ILogStrategy contract
     /// </summary>
     public abstract class BaseLogStrategy : ILogStrategy
     {
@@ -22,13 +22,13 @@ namespace Sporacid.Scopa.Strategies
         /// <summary>
         /// The name of the HDFS table
         /// </summary>
-        protected string HiveTableName { get; set; }
+        protected string HiveTableName { get; private set; }
 
         /// <summary>
         /// Abstract log strategy
         /// </summary>
         /// <param name="hiveTableName">The Hive table name</param>
-        protected BaseLogStrategy (string hiveTableName)
+        protected BaseLogStrategy(string hiveTableName)
         {
             this.HiveTableName = hiveTableName;
         }
@@ -36,26 +36,27 @@ namespace Sporacid.Scopa.Strategies
         /// <summary>
         /// Create a local staging directory from the archive path
         /// </summary>
-        /// <param name="hiveTableName">The name of the hive table that will be used as staging</param>
         /// <returns>The full path to the local staging directory</returns>
         public abstract string CreateLocalStagingDirectory();
 
         /// <summary>
-        /// 
+        /// Upload processed archive to HDFS to be indexed by Hive.
         /// </summary>
         public abstract void PushToHDFS();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        protected abstract string EnsureHDFSIndexes(string stagingDirectoryPath, IEnumerable<string> HDFSIndexes);
 
         /// <summary>
         /// Retrieves the HDFS folder index from the file name
         /// </summary>
         /// <param name="fileName">The name of the log file</param>
-        /// <returns>A list of the HDFS indexes</returns>
+        /// <returns>An ordered list of the HDFS indexes</returns>
         protected abstract IEnumerable<string> FetchHDFSIndexesName(string fileName);
+
+        /// <summary>
+        /// Ensure the staging folder indexes as directories
+        /// </summary>
+        /// <param name="stagingDirectoryPath">The staging directory disk path</param>
+        /// <param name="HDFSIndexes">An ordered list of the indexes to ensure</param>
+        /// <returns>The fully qualified path to copy the log file being processed</returns>
+        protected abstract string EnsureHDFSIndexes(string stagingDirectoryPath, IEnumerable<string> HDFSIndexes);
     }
 }

@@ -22,3 +22,6 @@ $DSP_SP2013_LogsFileNamePattern = "^([\w0-9]+)-([\d]{8})-[\d]{4}.log$"
 # IIS Logs
 $DSP_IIS_LogsLocalPath = "C:\Logs\IIS"
 $DSP_IIS_LogsFileNamePattern = "^u_ex([\d]{6}).log$"
+
+# Windows events Logs
+$DSP_Windows_LogsLocalPath = "C:\Windows\System32\winevt\Logs"

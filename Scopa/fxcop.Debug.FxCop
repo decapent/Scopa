@@ -23,12 +23,7 @@
     <Targets>
         <AssemblyReferenceDirectories>
         </AssemblyReferenceDirectories>
-        <!--
-        <Target Name="$(ProjectDir)/DSF.SharePoint.Website.Contracts/bin/Debug/DSF.SharePoint.Website.Contracts.dll" Analyze="True" AnalyzeAllChildren="True" />
-        <Target Name="$(ProjectDir)/DSF.SharePoint.Website.Core/bin/Debug/DSF.SharePoint.Website.Core.dll" Analyze="True" AnalyzeAllChildren="True" />
-        <Target Name="$(ProjectDir)/DSF.SharePoint.Website.ServiceLocator/bin/Debug/DSF.SharePoint.Website.ServiceLocator.dll" Analyze="True" AnalyzeAllChildren="True" />
-        <Target Name="$(ProjectDir)/DSF.SharePoint.Website/bin/Debug/DSF.SharePoint.Website.dll" Analyze="True" AnalyzeAllChildren="True" />
-        -->
+        <Target Name="$(ProjectDir)/Sporacid.Scopa/bin/Debug/Sporacid.Scopa.exe" Analyze="True" AnalyzeAllChildren="True" />
     </Targets>
     <Rules>
         <RuleFiles>

@@ -11,6 +11,9 @@
         /// <returns>The full path to the local staging directory</returns>
         string CreateLocalStagingDirectory();
 
+        /// <summary>
+        /// Upload processed archive to HDFS to be indexed by Hive.
+        /// </summary>
         void PushToHDFS();
     }
 }

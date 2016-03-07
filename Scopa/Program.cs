@@ -1,6 +1,6 @@
 ﻿using System;
-using Sporacid.Scopa.Entities;
 using System.IO;
+using Sporacid.Scopa.Entities.Enums;
 
 namespace Sporacid.Scopa
 {
@@ -20,7 +20,7 @@ namespace Sporacid.Scopa
             
             // List all the archives to be processed
             var archivesToProcess = Directory.EnumerateDirectories(rawArchiveRepositoryPath);
-            foreach(var rawArchive in archivesToProcess)
+            foreach (var rawArchive in archivesToProcess)
             {
                 // Extract Archive name from path
                 var archiveName = rawArchive.Substring(rawArchive.LastIndexOf('\\') + 1);

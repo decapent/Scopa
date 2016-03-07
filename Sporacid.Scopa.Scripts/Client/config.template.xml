@@ -10,5 +10,14 @@
       <LocalPath>[[DSP_IIS_LogsLocalPath]]</LocalPath>
       <FileNamePattern>[[DSP_IIS_LogsFileNamePattern]]</FileNamePattern>
     </Log>
+    <Log type="Windows">
+        <LocalPath>[[DSP_Windows_LogsLocalPath]]</LocalPath>
+        <Events>
+            <Event type="Application" />
+            <Event type="Security" />
+            <Event type="Setup" />
+            <Event type="System" />
+        </Events>
+    </Log>
   </Logs>
 </Configuration>
