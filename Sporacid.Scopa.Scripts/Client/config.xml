@@ -1,13 +1,13 @@
-<Configuration>
-  <RemoteHost hostname="VMSPPLAV" destination="C:\HDInsight\raw" />
-  <LastScopaDate>2/29/2016 11:24:19 PM</LastScopaDate>
+﻿<Configuration>
+  <RemoteHost hostname="VMSPPLAV" destination="\\VMSPPLAV\raw" />
+  <LastScopaDate>01/01/1970 12:00:00 PM</LastScopaDate>
   <Logs>
     <Log type="SP2013">
-      <LocalPath>C:\Logs\SP2013Logs</LocalPath>
+      <LocalPath>C:\Logs\SP2013</LocalPath>
       <FileNamePattern>^([\w0-9]+)-([\d]{8})-[\d]{4}.log$</FileNamePattern>
     </Log>
     <Log type="IIS">
-      <LocalPath>C:\Logs\IISLogs</LocalPath>
+      <LocalPath>C:\Logs\IIS</LocalPath>
       <FileNamePattern>^u_ex([\d]{6}).log$</FileNamePattern>
     </Log>
   </Logs>

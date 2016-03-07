@@ -19,7 +19,7 @@ Param(
 
 # Ensure deployment folder
 $deploymentPath = "[[DSP_SCOPACLIENT_DEPLOYMENTFOLDER]]"
-if(-not(Test-Path($deploymentPath)) 
+if(-not(Test-Path($deploymentPath))) 
 {
 	New-Item -Type Directory -Path $deploymentPath 
 }
@@ -36,13 +36,22 @@ foreach($file in $filesToCopy)
 Try
 {
 	Write-Host "Registering Scopa Scheduled Task... " -NoNewLine
-	$taskScript = Join-Path $deploymentPath "Upload-LogsToServer.ps1 -Incremental"
-	$taskArgs = "-WindowStyle Hidden -NonInteractive -Executionpolicy unrestricted -File $taskScript"
-	$taskAction = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument $taskArgs
-	$taskTrigger =  New-ScheduledTaskTrigger -Daily -At 8pm
+	$taskName = "Scopa Client"
+	$taskExists = Get-ScheduledTask | Where-Object {$_.TaskName -eq $taskName}
+	if($taskExists) 
+	{
+		Write-Host "skipped!" -ForegroundColor Yellow
+	}
+	else
+	{
+		$taskScript = Join-Path $deploymentPath "Upload-LogsToServer.ps1 -Incremental"
+		$taskArgs = "-WindowStyle Hidden -NonInteractive -Executionpolicy unrestricted -File $taskScript"
+		$taskAction = New-ScheduledTaskAction -Execute 'Powershell.exe' -Argument $taskArgs
+		$taskTrigger =  New-ScheduledTaskTrigger -Daily -At 8pm
 
-	Register-ScheduledTask -Action $taskAction -Trigger $taskTrigger -TaskName "Scopa Client - Incremental" -TaskPath $TaskPath -Description "Runs a powershell script that bundles development log files daily."
-	Write-Host "complete!" -ForeGroundColor Green
+		Register-ScheduledTask -Action $taskAction -Trigger $taskTrigger -TaskName $taskName -TaskPath $TaskPath -Description "Runs a powershell script that bundles development log files daily."
+		Write-Host "complete!" -ForeGroundColor Green
+	}
 } 
 Catch
 {

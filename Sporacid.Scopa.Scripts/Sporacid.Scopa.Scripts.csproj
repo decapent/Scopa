@@ -42,7 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Client\Create-DataUploadScheduledTask - Copy.ps1" />
+    <None Include="Client\Deploy-ScopaClient.template.ps1" />
     <None Include="Client\Upload-LogsToServer.ps1" />
     <None Include="Tokens.vmspplav.ps1" />
   </ItemGroup>
