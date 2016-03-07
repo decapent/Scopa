@@ -6,6 +6,7 @@
     public enum LogTypes
     {
         SP2013,
-        IIS
+        IIS,
+        Windows
     }
 }

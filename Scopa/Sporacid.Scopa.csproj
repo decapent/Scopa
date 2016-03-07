@@ -44,6 +44,7 @@
     <Compile Include="Entities\BaseLogArchive.cs" />
     <Compile Include="Contracts\ILogStrategy.cs" />
     <Compile Include="Entities\IISLogArchive.cs" />
+    <Compile Include="Entities\WindowsLogArchive.cs" />
     <Compile Include="LogStrategyFactory.cs" />
     <Compile Include="Entities\LogTypes.cs" />
     <Compile Include="Program.cs" />
